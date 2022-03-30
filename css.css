@@ -23,10 +23,12 @@ p {
 
 h3 {
 	margin: 0;
+	text-align: center;
 }
 
 h5 {
 	margin: 10px 0;
+	text-align: center;
 }
 
 li {
@@ -56,18 +58,27 @@ li {
 	height: 100%;
 }
 
-.fullscreen {
+.container {
 	position: fixed;
 	top: 0;
 	left: 0;
 	bottom: 0;
 	right: 0;
 	overflow: auto;
-	background: lime; /* Just to visualize the extent */
+	background: hsl(192, 68%, 33%); /* Just to visualize the extent */
 }	
 .container{
 	margin: auto;
 	width: 60%;
-	border: 3px solid #73AD21;
+	border: 3px solid #2162ad;
 	padding: 10px;
+  }
+.button-primary{
+	margin: 0;
+	text-align: center;
+}
+.space {
+	width: 4px;
+	height: auto;
+	display: inline-block;
   }
