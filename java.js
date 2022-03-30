@@ -26,7 +26,7 @@ const createMeal = (meal) => {
         const newInnerHTML = `
         <div class="row">
         <div class="columns_five">
-        <img src="${meal.strMealThumb}" alt="Meal Image">
+        <img src="${meal.strMealThumb}" alt="Meal Image" class="center">
         ${
             meal.strCategory
                 ? `<p><strong>Category:</strong> ${meal.strCategory}</p>`
