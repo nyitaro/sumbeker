@@ -22,12 +22,12 @@ p {
 	margin-bottom: 5px;
 }
 
-h3 {
+.firstText {
 	margin: 0;
 	text-align: center;
 }
 
-h5 {
+.secondText{
 	margin: 10px 0;
 	text-align: center;
 }
