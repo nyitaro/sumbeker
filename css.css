@@ -56,18 +56,26 @@ li {
 	height: 100%;
 }
 
-.fullscreen {
+/*.fullscreen {
 	position: fixed;
 	top: 0;
 	left: 0;
 	bottom: 0;
 	right: 0;
 	overflow: auto;
-	background: lime; /* Just to visualize the extent */
-}	
-.container{
+	background: rgb(56, 12, 47);
+} */
+
+.container {
 	margin: auto;
 	width: 60%;
-	border: 3px solid #73AD21;
+	border: 3px solid #b16f23;
+	padding: 10px;
+  }
+
+.columns_five {
+	margin: auto;
+	width: 60%;
+	border: 3px solid #000000;
 	padding: 10px;
   }
