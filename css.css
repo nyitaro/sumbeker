@@ -23,10 +23,12 @@ p {
 
 h3 {
 	margin: 0;
+	text-align: center;
 }
 
 h5 {
 	margin: 10px 0;
+	text-align: center;
 }
 
 li {
@@ -55,28 +57,28 @@ li {
 	width: 100%;
 	height: 100%;
 }
-
-/*.fullscreen {
+.container{
 	position: fixed;
 	top: 0;
 	left: 0;
 	bottom: 0;
 	right: 0;
 	overflow: auto;
-	background: rgb(56, 12, 47);
-} */
-
-.container {
+	background: hsl(192, 68%, 33%); /* Just to visualize the extent */
+}	
+.container{
 	margin: auto;
 	width: 60%;
-	border: 3px solid #b16f23;
+	border: 3px solid #2162ad;
 	padding: 10px;
 	background-color: rgb(55, 79, 87)
   }
-
-.columns_five {
-	margin: auto;
-	width: 60%;
-	border: 3px solid #000000;
-	padding: 10px;
+.button-primary{
+	margin: 0;
+	text-align: center;
+}
+.space {
+	width: 4px;
+	height: auto;
+	display: inline-block;
   }
