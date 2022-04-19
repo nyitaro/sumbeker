@@ -1,5 +1,6 @@
 const get_meal_btn = document.getElementById('get_meal');
 const meal_container = document.getElementById('meal');
+const get_ingredient = document.getElementById('searchfield');
 
 get_meal_btn.addEventListener('click', () => {
     fetch('https://www.themealdb.com/api/json/v1/1/random.php')
@@ -11,6 +12,27 @@ get_meal_btn.addEventListener('click', () => {
         console.warn(e);
     });
 });
+
+get_ingredient.addEventListener('click', () => {
+    fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i='+document.getElementById('searchfield').value)
+    .then(res => res.json())
+    .then(res => {
+        fetch('https://www.themealdb.com/api/json/v1/1/search.php?s='+res.meals[0].strMeal)
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            createMeal(res.meals[0]);
+        }
+        )
+        .catch(e => {
+            console.warn(e);
+        });   
+    })
+    .catch(e => {
+        console.warn(e);
+    });
+});
+
 const createMeal = (meal) => {
     const ingredients = [];
 
