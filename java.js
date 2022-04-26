@@ -14,36 +14,14 @@ get_meal_btn.addEventListener('click', () => {
     });
 });
 
-search_meal_btn.addEventListener('click', () => {
-    search_field_value = get_ingredient.value; // == document.getElementById('searchfield').value
-    if (search_field_value) {
-        console.log(search_field_value);
-        fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i='+search_field_value)
-                .then(res => res.json())
-                .then(res => {
-                    if(res.meals == null){
-                    meal_container.innerHTML='<img src="https://pngset.com/images/download-pepe-pepe-listening-to-music-plant-animal-reptile-food-transparent-png-2679541.png" alt="Meal Image" class="center">';
-                }
-                else {
-                   console.log(res);
-                   fetch('https://www.themealdb.com/api/json/v1/1/search.php?s='+res.meals[0].strMeal)
-                   .then(res => res.json())
-                   .then(res => {
-                        createMeal(res.meals[0]);
-                   })
-                   .catch(e => {
-                     console.warn(e);
-                   });
-                }
-        }
-        )
-        .catch(e => {
-            console.warn(e);
-            console.log("Error hit");
-        });
-    } else {
-        console.log("The value is empty.");
+get_ingredient.addEventListener('keydown', function (e)  {
+    if (e.key == 'Enter') {
+        search_meal();
     }
+});
+
+search_meal_btn.addEventListener('click', () => {
+    search_meal();
 });
 
 /*get_ingredient.addEventListener('click', () => {
@@ -151,4 +129,38 @@ ${
 }
         `;
         meal_container.innerHTML=newInnerHTML;
+    }
+
+
+    // Works with search button and search get ingredient text box
+    function search_meal() {
+        search_field_value = get_ingredient.value; // == document.getElementById('searchfield').value
+        if (search_field_value) {
+            console.log(search_field_value);
+            fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i='+search_field_value)
+                    .then(res => res.json())
+                    .then(res => {
+                        if(res.meals == null){
+                        meal_container.innerHTML='<img src="https://pngset.com/images/download-pepe-pepe-listening-to-music-plant-animal-reptile-food-transparent-png-2679541.png" alt="Meal Image" class="center">';
+                    }
+                    else {
+                       console.log(res);
+                       fetch('https://www.themealdb.com/api/json/v1/1/search.php?s='+res.meals[0].strMeal)
+                       .then(res => res.json())
+                       .then(res => {
+                            createMeal(res.meals[0]);
+                       })
+                       .catch(e => {
+                         console.warn(e);
+                       });
+                    }
+            }
+            )
+            .catch(e => {
+                console.warn(e);
+                console.log("Error hit");
+            });
+        } else {
+            console.log("The value is empty.");
+        }
     }
