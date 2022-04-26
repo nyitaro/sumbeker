@@ -21,8 +21,13 @@ search_meal_btn.addEventListener('click', () => {
         fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i='+search_field_value)
         .then(res => res.json())
         .then(res => {
-            console.log(res);
-            createMeal(res.meals[0]);
+            if(res.meals == null){
+                console.log("No recipes"); 
+                meal_container.innerHTML="<p>There are no recipes with this ingredient!</p>"
+            } else {
+                console.log(res);
+                createMeal(res.meals[0]);
+            }
         }
         )
         .catch(e => {
@@ -138,4 +143,4 @@ ${
 }
         `;
         meal_container.innerHTML=newInnerHTML;
-    }
+    };
