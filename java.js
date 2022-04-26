@@ -22,13 +22,18 @@ search_meal_btn.addEventListener('click', () => {
                 .then(res => res.json())
                 .then(res => {
                     if(res.meals == null){
-                        const newInnerHTML = `
-                            <img src="https://pngset.com/images/download-pepe-pepe-listening-to-music-plant-animal-reptile-food-transparent-png-2679541.png" alt="Meal Image" class="center">`;
-                    meal_container.innerHTML=newInnerHTML;
+                    meal_container.innerHTML='<img src="https://pngset.com/images/download-pepe-pepe-listening-to-music-plant-animal-reptile-food-transparent-png-2679541.png" alt="Meal Image" class="center">';
                 }
-                else{
-            console.log(res);
-            createMeal(res.meals[0]);
+                else {
+                   console.log(res);
+                   fetch('https://www.themealdb.com/api/json/v1/1/search.php?s='+res.meals[0].strMeal)
+                   .then(res => res.json())
+                   .then(res => {
+                        createMeal(res.meals[0]);
+                   })
+                   .catch(e => {
+                     console.warn(e);
+                   });
                 }
         }
         )
