@@ -19,14 +19,22 @@ search_meal_btn.addEventListener('click', () => {
     if (search_field_value) {
         console.log(search_field_value);
         fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i='+search_field_value)
-        .then(res => res.json())
-        .then(res => {
+                .then(res => res.json())
+                .then(res => {
+                    if(res.meals == null){
+                        const newInnerHTML = `
+                            <img src="https://pngset.com/images/download-pepe-pepe-listening-to-music-plant-animal-reptile-food-transparent-png-2679541.png" alt="Meal Image" class="center">`;
+                    meal_container.innerHTML=newInnerHTML;
+                }
+                else{
             console.log(res);
             createMeal(res.meals[0]);
+                }
         }
         )
         .catch(e => {
             console.warn(e);
+            console.log("Error hit");
         });
     } else {
         console.log("The value is empty.");
