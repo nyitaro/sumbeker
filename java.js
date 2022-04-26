@@ -1,6 +1,7 @@
 const get_meal_btn = document.getElementById('get_meal');
 const meal_container = document.getElementById('meal');
 const get_ingredient = document.getElementById('searchfield');
+const search_meal_btn = document.getElementById('search_btn');
 
 get_meal_btn.addEventListener('click', () => {
     fetch('https://www.themealdb.com/api/json/v1/1/random.php')
@@ -13,7 +14,26 @@ get_meal_btn.addEventListener('click', () => {
     });
 });
 
-get_ingredient.addEventListener('click', () => {
+search_meal_btn.addEventListener('click', () => {
+    search_field_value = get_ingredient.value; // == document.getElementById('searchfield').value
+    if (search_field_value) {
+        console.log(search_field_value);
+        fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i='+search_field_value)
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            createMeal(res.meals[0]);
+        }
+        )
+        .catch(e => {
+            console.warn(e);
+        });
+    } else {
+        console.log("The value is empty.");
+    }
+});
+
+/*get_ingredient.addEventListener('click', () => {
     fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i='+document.getElementById('searchfield').value)
     .then(res => res.json())
     .then(res => {
@@ -31,7 +51,38 @@ get_ingredient.addEventListener('click', () => {
     .catch(e => {
         console.warn(e);
     });
-});
+});*/
+
+/** 
+    pushing - [strIngredient${i}, meal[`strMeasure${i}]]
+
+    ingredients [
+        ["Rice", "200g"],  
+        ["Cumin", "10g"],
+        ["milk", "100ml"]
+    ]
+
+    meal: {
+        strIngredients: {
+            strIngredients1: "Rice",
+            strIngredients2: "Cumin",
+            strIngredients3: "milk"
+        },
+        strMeasure: {
+            strMeasure1: "200g",
+            strMeasure2: "10g",
+            strMeasure3: "100ml"
+        },
+        strMealThumb: "test"
+    }
+
+    1st iteration of loop: 
+        [strIngredient1}, meal[`strMeasure1]]
+        == 
+        ingredients [
+        ["Rice", "200g"]
+    ]
+**/
 
 const createMeal = (meal) => {
     const ingredients = [];
@@ -42,9 +93,9 @@ const createMeal = (meal) => {
               `${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`
           );
           } else {
-              break;
-          }
+             break;
         }
+    }
         const newInnerHTML = `
         <div class="row">
         <div class="columns_five">
@@ -88,4 +139,3 @@ ${
         `;
         meal_container.innerHTML=newInnerHTML;
     }
-
