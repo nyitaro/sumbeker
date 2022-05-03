@@ -2,6 +2,7 @@ const get_meal_btn = document.getElementById('get_meal');
 const meal_container = document.getElementById('meal');
 const get_ingredient = document.getElementById('searchfield');
 const search_meal_btn = document.getElementById('search_btn');
+const category_search = document.getElementById('foodCategories');
 
 get_meal_btn.addEventListener('click', () => {
     fetch('https://www.themealdb.com/api/json/v1/1/random.php')
@@ -22,6 +23,10 @@ get_ingredient.addEventListener('keydown', function (e)  {
 
 search_meal_btn.addEventListener('click', () => {
     search_meal();
+});
+
+category_search.addEventListener('click', () => {
+    search_category();
 });
 
 /*get_ingredient.addEventListener('click', () => {
@@ -138,6 +143,38 @@ ${
         if (search_field_value) {
             console.log(search_field_value);
             fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i='+search_field_value)
+                    .then(res => res.json())
+                    .then(res => {
+                        if(res.meals == null){
+                        meal_container.innerHTML='<img src="https://pngset.com/images/download-pepe-pepe-listening-to-music-plant-animal-reptile-food-transparent-png-2679541.png" alt="Meal Image" class="center">';
+                    }
+                    else {
+                       console.log(res);
+                       fetch('https://www.themealdb.com/api/json/v1/1/search.php?s='+res.meals[0].strMeal)
+                       .then(res => res.json())
+                       .then(res => {
+                            createMeal(res.meals[0]);
+                       })
+                       .catch(e => {
+                         console.warn(e);
+                       });
+                    }
+            }
+            )
+            .catch(e => {
+                console.warn(e);
+                console.log("Error hit");
+            });
+        } else {
+            console.log("The value is empty.");
+        }
+    }
+
+    function search_category() {
+        category = category_search.value; // == document.getElementById('searchfield').value
+        if (category) {
+            console.log(category);
+            fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c='+category)
                     .then(res => res.json())
                     .then(res => {
                         if(res.meals == null){
